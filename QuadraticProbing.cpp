@@ -52,13 +52,13 @@
          * already present, then do nothing.
          */
         template <class HashedObj>
-        void QuadraticHashTable<HashedObj>::insert( const HashedObj & x )
+        void QuadraticHashTable<HashedObj>::insert( unsigned ID,  const HashedObj & x )
         {
                 // Insert x as active
-            int currentPos = findPos( x );
+            int currentPos = findPos( ID );
             if( isActive( currentPos ) )
                 return;
-            array[ currentPos ] = HashEntry( x, ACTIVE );
+            array[ currentPos ] = HashEntry( ID, x, ACTIVE );
 
                 // Rehash; see Section 5.5
             if( ++currentSize > array.size( ) / 2 )
@@ -82,7 +82,7 @@
             currentSize = 0;
             for( int i = 0; i < oldArray.size( ); i++ )
                 if( oldArray[ i ].info == ACTIVE )
-                    insert( oldArray[ i ].element );
+                    insert( oldArray[ i ].index, oldArray[ i ].element);
         }
 
         /**
@@ -96,7 +96,7 @@
 /* 2*/      int currentPos = hash( x, array.size( ) );
 
 /* 3*/      while( array[ currentPos ].info != EMPTY &&
-                   array[ currentPos ].element != x )
+                   array[ currentPos ].index != x )
             {
 /* 4*/          currentPos += 2 * ++collisionNum - 1;  // Compute ith probe
 /* 5*/          if( currentPos >= array.size( ) )
@@ -111,9 +111,9 @@
          * Remove item x from the hash table.
          */
         template <class HashedObj>
-        void QuadraticHashTable<HashedObj>::remove( const HashedObj & x )
+        void QuadraticHashTable<HashedObj>::remove( unsigned ID )
         {
-            int currentPos = findPos( x );
+            int currentPos = findPos( ID );
             if( isActive( currentPos ) )
                 array[ currentPos ].info = DELETED;
         }
@@ -123,9 +123,9 @@
          * Return the matching item, or ITEM_NOT_FOUND, if not found.
          */
         template <class HashedObj>
-        const HashedObj & QuadraticHashTable<HashedObj>::find( const HashedObj & x ) const
+        const HashedObj & QuadraticHashTable<HashedObj>::find( unsigned ID ) const
         {
-            int currentPos = findPos( x );
+            int currentPos = findPos( ID );
             return isActive( currentPos ) ? array[ currentPos ].element : ITEM_NOT_FOUND;
         }
 

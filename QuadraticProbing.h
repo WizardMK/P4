@@ -26,11 +26,11 @@
               : array( rhs.array), ITEM_NOT_FOUND( rhs.ITEM_NOT_FOUND ),
                 currentSize( rhs.currentSize ) { }
 
-            const HashedObj & find( const HashedObj & x ) const;
+            const HashedObj & find( unsigned ID ) const;
 
             void makeEmpty( );
-            void insert( const HashedObj & x );
-            void remove( const HashedObj & x );
+            void insert( unsigned ID, const HashedObj & x );
+            void remove( unsigned ID );
 
             const QuadraticHashTable & operator=( const QuadraticHashTable & rhs );
 
@@ -38,11 +38,12 @@
           private:
             struct HashEntry
             {
+                unsigned index;
                 HashedObj element;
                 EntryType info;
 
-                HashEntry( const HashedObj & e = HashedObj( ), EntryType i = EMPTY )
-                  : element( e ), info( i ) { }
+                HashEntry( int ID = 0, const HashedObj & e = HashedObj( ), EntryType i = EMPTY )
+                  : index(ID), element( e ), info( i ) { }
             };
 
             vector<HashEntry> array;
