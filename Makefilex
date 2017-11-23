@@ -1,0 +1,14 @@
+defrag.out : defragmenter.o DefragRunner.o mynew.o  
+	g++ -ansi -Wall -g -o defrag.out defragmenter.o DefragRunner.o mynew.o  
+
+defragmenter.o : defragmenter.cpp defragmenterx.h 
+	g++ -ansi -Wall -g -c defragmenter.cpp
+
+DefragRunner.o : DefragRunnerx.cpp DefragRunnerx.h mynewx.h CPUTimerx.h defragmenterx.h 
+	g++ -ansi -Wall -g -c DefragRunner.cpp
+
+mynew.o : mynewx.cpp mynewx.h 
+	g++ -ansi -Wall -g -c mynew.cpp
+
+clean : 
+	rm -f defrag.out defragmenter.o  DefragRunner.o  mynew.o   
