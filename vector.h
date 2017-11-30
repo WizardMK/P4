@@ -1,5 +1,6 @@
 #ifndef _VECTOR_H
 #define _VECTOR_H
+
 /*
  * The next line is used because Codewarrior has a conflict with
  * the STL vector. Make sure to put the #include of this file
@@ -26,10 +27,10 @@ class vector
 
     Object & operator[]( int index )
     {
-    #ifndef NO_CHECK
+                                                     #ifndef NO_CHECK
         if( index < 0 || index >= currentSize )
             throw ArrayIndexOutOfBounds( );
-    #endif
+                                                     #endif
         return objects[ index ];
     }
 
