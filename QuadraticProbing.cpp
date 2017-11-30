@@ -2,11 +2,7 @@
 #include "mynew.h"
 #include "DefragRunner.h"
 
-/**
- * Internal method to test if a positive number is prime.
- * Not an efficient algorithm.
- Can rewrite to possibly improve time
- */
+
 template <class HashedObj>
 bool QuadraticHashTable<HashedObj>::isPrime( int n ) const
 {
